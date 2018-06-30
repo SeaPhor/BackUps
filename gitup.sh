@@ -2,6 +2,18 @@
 #
 	#USER=<username> #Un-Comment this line and replace PATH and <username> with actual if you need to specify a different PATH and user, OR, change the PATH value for the next line [HOMEDIR]
 	HOMEDIR=/home/$USER/MyGitRepos/home
+	LOGDIR=$HOMEDIR/logs
+	LOGFIL=$LOGDIR/syncrepos.log
+	if [[ ! -d $LOGDIR ]]; then
+		mkdir $LOGDIR
+		touch $LOGFIL
+	else
+		if [[ ! -f $LOGFIL ]]; then
+			touch $LOGFIL
+		fi
+	fi
+	SYNCDAT=`date +%Y-%m-%d_%H:%M`
+	LOGDAT=`date +%Y-%m-%d_%H.%M`
 	#Change the values of the parent dirctory/s for your dirs
 	HROOTDIR=$HOMEDIR/github
 	OROOTDIR=$HOMEDIR/Ogitlab
@@ -29,8 +41,8 @@ function git_sync
 {
 for i in $LGITDIR ; do rsync -arv --exclude='.git' $LROOTDIR/$i/* $HROOTDIR/$i/. ; rsync -arv --exclude='.git' $LROOTDIR/$i/* $OROOTDIR/$i/. ; git_hub ; ogit_lab ; done
 }
-
-git_lab
-git_sync
-
+echo -e "\n $SYNCDAT\n" >> $LOGFIL
+git_lab 2>&1 >> $LOGFIL
+git_sync 2>&1 >> $LOGFIL
+echo -e "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" >> $LOGFIL
 exit $?
