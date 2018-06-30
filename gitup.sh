@@ -6,7 +6,6 @@
 	HROOTDIR=$HOMEDIR/github
 	OROOTDIR=$HOMEDIR/Ogitlab
 	LROOTDIR=$HOMEDIR/gitlab
-	OROOTDIR=$HOMEDIR/Ogitlab
 	#Change the values between the "quotes" with the repo/directory names for your repos
 	HGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
 	LGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
@@ -31,9 +30,7 @@ function git_sync
 for i in $LGITDIR ; do rsync -arv --exclude='.git' $LROOTDIR/$i/* $HROOTDIR/$i/. ; rsync -arv --exclude='.git' $LROOTDIR/$i/* $OROOTDIR/$i/. ; git_hub ; ogit_lab ; done
 }
 
-git_hub
 git_lab
-ogit_lab
 git_sync
 
 exit $?
