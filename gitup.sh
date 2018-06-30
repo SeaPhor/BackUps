@@ -14,6 +14,24 @@
 	fi
 	SYNCDAT=`date +%Y-%m-%d_%H:%M`
 	LOGDAT=`date +%Y-%m-%d_%H.%M`
+#
+###    Check Log Size/Rotate
+if [[ "`du -b $LOGFIL | awk '{print $1}'`" -ge "40960" ]]; then
+    cd $LOGDIR
+    tar -czvf $LOGDAT-syncrepos.log.tar.gz syncrepos.log
+    > syncrepos.log
+    cd
+fi
+#
+###    Check Backups Number/Remove Set at 6 for this script
+cd $LOGDIR
+i="`ls $LOGDIR | grep 'tar.gz' | wc -l`"
+while [ $i -ge 4 ]
+do
+ls -1tr $LOGDIR | grep tar.gz | head -n1 | xargs rm -rf
+i=$[$i-1]
+done
+#
 	#Change the values of the parent dirctory/s for your dirs
 	HROOTDIR=$HOMEDIR/github
 	OROOTDIR=$HOMEDIR/Ogitlab
@@ -41,7 +59,7 @@ function git_sync
 {
 for i in $LGITDIR ; do rsync -arv --exclude='.git' $LROOTDIR/$i/* $HROOTDIR/$i/. ; rsync -arv --exclude='.git' $LROOTDIR/$i/* $OROOTDIR/$i/. ; git_hub ; ogit_lab ; done
 }
-echo -e "\n $SYNCDAT\n" >> $LOGFIL
+echo -e "\n $SYNCDAT DATE OF SYNC\n" >> $LOGFIL
 git_lab 2>&1 >> $LOGFIL
 git_sync 2>&1 >> $LOGFIL
 echo -e "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" >> $LOGFIL
