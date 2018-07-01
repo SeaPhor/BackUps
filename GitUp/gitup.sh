@@ -20,15 +20,9 @@ if [[ "`echo $1`" == "help" ]]; then
 ##    Modify the path/s to your local git repo directory/s
 ##    Run the script with no options to perform all tasks
 ##    Run the script with [help] option to show this info and exit.
+##    Run the script with [ask] option to input the commt message manually.
 "
 	exit $?
-else
-	if [[ "`echo $1`" == "ask" ]]; then
-		echo -e "\nType your commit statement...\n"
-		read ASKME
-	else
-		ASKME="Script Auto Run"
-	fi
 fi
 #
 	#USER=<username> #Un-Comment this line and replace PATH and <username> with actual if you need to specify a different PATH and user, OR, change the PATH value for the next line [HOMEDIR]
@@ -71,6 +65,12 @@ done
 	HGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
 	LGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
 	OGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
+if [[ "`echo $1`" == "ask" ]]; then
+	echo -e "\nType your commit statement...\n"
+	read ASKME
+else
+	ASKME="Script Auto Run"
+fi
 function git_hub
 {
 for i in $HGITDIR ; do echo "$HROOTDIR $i" >> $LOGFIL ; cd $HROOTDIR/$i/ ; git checkout master ; git add * ; git commit -a -m "$ASKME" ; git pull origin master ; git push origin master; done
