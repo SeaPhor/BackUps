@@ -1,19 +1,32 @@
-
+#
 ##    Description-
-##    This script is designed to manage multiple GIT repositories
-##        and from multiple sources, i.e. github, gitlab, and
-##        local/network remote repos.
+##    I started out having only one git remote repo, local network,
+##        then I got a github account and maintained both, and when
+##        MS aquired github, I installed GitLab Server locally, and
+##        opened a Gitlab.com account and was maintaining all 4 repos.
+##    This script is designed to manage and sync multiple GIT 
+##        repositories and from multiple sources, i.e. github, gitlab,
+##         and local/network remote repos.
 ##    It is based on the Idea that you want to edit code in 1 (ONE)
 ##        repo, sync those changes to all your local repos, and then
 ##        add/commit/pull/push all of them to the remote 'origin/s'
 ##    It will perform the following functions-
-##        Log all output to a logfile, and rotate them depending
+##    *   Log all output to a logfile, and rotate them depending
 ##            on size and number, with timestamps in the log and
 ##            on the tar backup filenames.
-##        Perform a add/commit/pull/push on the ONE working local repo
-##        Sync the ONE working local repo with all other local repos
-##        Perform a add/commit/pull/push on all the other local repos
+##    *   Perform a add/commit/pull/push on the ONE working local repo
+##    *   Sync the ONE working local repo with all other local repos
+##    *   Perform a add/commit/pull/push on all the other local repos
 ##    Usage-
 ##    Modify the path/s to your local git repo directory/s
-##    Run the script with no options to perform all tasks
+##    Run the script with no options to perform all tasks without user input.
 ##    Run the script with [help] option to show this info and exit.
+##    Run the script with [ask] option to input the commt message manually.
+#
+##    seaphor@woodbeeco.com
+##    SeaPhor on GitLab
+##    SeaPhor on GitHub
+##    SeaPhor on Youtube
+##    SeaPhor on IRC, #seaphor on Freenode Server
+##    SeaPhor
+#

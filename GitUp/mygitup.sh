@@ -25,7 +25,7 @@ RESET=`tput sgr0`
 if [[ "`echo $1`" == "help" ]]; then
 	echo -e "$LTCYN
 #
-##$BOLD$YELLOW   Description-$RESET$LTCYN
+##$BOLD$YELLOW    Description-$RESET$LTCYN
 ##    I started out having only one git remote repo, local network,
 ##        then I got a github account and maintained both, and when
 ##        MS aquired github, I installed GitLab Server locally, and
@@ -43,16 +43,16 @@ if [[ "`echo $1`" == "help" ]]; then
 ##    *   Perform a add/commit/pull/push on the ONE working local repo
 ##    *   Sync the ONE working local repo with all other local repos
 ##    *   Perform a add/commit/pull/push on all the other local repos
-##$BOLD$YELLOW    Usage-$RESETLTCYN
-##$LTYLLW    Modify the path/s to your local git repo directory/s
-##    To bypass the user/pass prompt, modify your .git/configs as such-
+##$BOLD$YELLOW    Usage-$RESET$LTCYN
+##$LTYLLW    Modify the path/s to your local git repo directory/s$LTCYN
+##    To bypass the user/pass prompt, modify your .git/config/s as such-
 ##$BOLD$LTCYN        url$RESET$LTCYN =$LTYLLW https://User:PassWord@github.com/repopath/repo.git$LTCYN
-##    Run the script with$BOLD no$RESETLTCYN options to perform all tasks without user input.
-##    Run the script with$BOLD [help]$RESETLTCYN option to show this info and exit.
-##    Run the script with$BOLD [ask]$RESETLTCYN option to input the commit message manually.
+##    Run the script with$BOLD no$RESET$LTCYN options to perform all tasks without user input.
+##    Run the script with$BOLD [help]$RESET$LTCYN option to show this info and exit.
+##    Run the script with$BOLD [ask]$RESET$LTCYN option to input the commit message manually.
 #
 ##$CYAN    seaphor@woodbeeco.com$LTCYN
-##$GREEN    SeaPhor on GitLab$LTCYN
+##$LTGRN    SeaPhor on GitLab$LTCYN
 ##$RED    SeaPhor on GitHub$LTCYN
 ##$LTRED    SeaPhor on Youtube$LTCYN
 ##$MAG    SeaPhor on IRC, #seaphor on Freenode Server$LTCYN
@@ -61,7 +61,7 @@ if [[ "`echo $1`" == "help" ]]; then
 "
 	exit $?
 fi
-	#USER=<username> #Un-Comment this line and replace PATH and <username> with actual if you need to specify a different PATH and user, OR, change the PATH value for the next line [HOMEDIR]
+#USER=<username> #Un-Comment this line and replace PATH and <username> with actual if you need to specify a different PATH and user, OR, change the PATH value for the next line [HOMEDIR]
 	HOMEDIR=/home/$USER/MyGitRepos/home
 	LOGDIR=$HOMEDIR/logs
 	LOGFIL=$LOGDIR/syncrepos.log
@@ -84,10 +84,10 @@ if [[ "`du -b $LOGFIL | awk '{print $1}'`" -ge "40960" ]]; then
     cd
 fi
 #
-###    Check Backups Number/Remove Set at 6 for this script
+###    Check Backups Number/Remove Set at 4 for this script
 cd $LOGDIR
 i="`ls $LOGDIR | grep 'tar.gz' | wc -l`"
-while [ $i -ge 4 ]
+while [ $i -ge 5 ]
 do
 ls -1tr $LOGDIR | grep tar.gz | head -n1 | xargs rm -rf
 i=$[$i-1]
@@ -98,9 +98,9 @@ done
 	OROOTDIR=$HOMEDIR/Ogitlab
 	LROOTDIR=$HOMEDIR/gitlab
 	#Change the values between the "quotes" with the repo/directory names for your repos
-	HGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
-	LGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
-	OGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
+	HGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks BackUps"
+	LGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks BackUps"
+	OGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks BackUps"
 if [[ "`echo $1`" == "ask" ]]; then
 	echo -e "\nType your commit statement...\n"
 	read ASKME
