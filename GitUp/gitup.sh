@@ -73,17 +73,17 @@ done
 	OGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
 function git_hub
 {
-for i in $HGITDIR ; do echo "$HROOTDIR $i" >> $LOGFIL ; cd $HROOTDIR/$i/ ; git checkout master ; git add * ; git commit -a -m "Script Auto Run" ; git pull origin master ; git push origin master; done
+for i in $HGITDIR ; do echo "$HROOTDIR $i" >> $LOGFIL ; cd $HROOTDIR/$i/ ; git checkout master ; git add * ; git commit -a -m "$ASKME" ; git pull origin master ; git push origin master; done
 }
 #
 function git_lab
 {
-for i in $LGITDIR ; do echo "$LROOTDIR $i" >> $LOGFIL ; cd $LROOTDIR/$i/ ; git checkout master ; git add * ; git commit -a -m "Script Auto Run" ; git pull origin master ; git push origin master; done
+for i in $LGITDIR ; do echo "$LROOTDIR $i" >> $LOGFIL ; cd $LROOTDIR/$i/ ; git checkout master ; git add * ; git commit -a -m "$ASKME" ; git pull origin master ; git push origin master; done
 }
 #
 function ogit_lab
 {
-for i in $OGITDIR ; do echo "$OROOTDIR $i" >> $LOGFIL ; cd $OROOTDIR/$i/ ; git checkout master ; git add * ; git commit -a -m "Script Auto Run" ; git pull origin master ; git push origin master; done
+for i in $OGITDIR ; do echo "$OROOTDIR $i" >> $LOGFIL ; cd $OROOTDIR/$i/ ; git checkout master ; git add * ; git commit -a -m "$ASKME" ; git pull origin master ; git push origin master; done
 }
 #
 function git_sync
