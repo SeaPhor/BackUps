@@ -22,6 +22,13 @@ if [[ "`echo $1`" == "help" ]]; then
 ##    Run the script with [help] option to show this info and exit.
 "
 	exit $?
+else
+	if [[ "`echo $1`" == "ask" ]]; then
+		echo -e "\nType your commit statement...\n"
+		read ASKME
+	else
+		ASKME="Script Auto Run"
+	fi
 fi
 #
 	#USER=<username> #Un-Comment this line and replace PATH and <username> with actual if you need to specify a different PATH and user, OR, change the PATH value for the next line [HOMEDIR]
