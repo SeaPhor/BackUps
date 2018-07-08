@@ -22,6 +22,8 @@ NULINE=`tput rmul`
 BOLD=`tput bold`
 RESET=`tput sgr0`
 #
+USERPASS="$LTYLLW""User:PassWord$LTCYN"
+#
 if [[ "`echo $1`" == "help" ]]; then
 	echo -e "$LTCYN
 #
@@ -44,16 +46,16 @@ if [[ "`echo $1`" == "help" ]]; then
 ##    *   Sync the ONE working local repo with all other local repos
 ##    *   Perform a add/commit/pull/push on all the other local repos
 ##$BOLD$YELLOW    Usage-$RESET$LTCYN
-##$LTYLLW    Modify the path/s to your local git repo directory/s$LTCYN
+##$LTYLLW    Modify the variables in this script path/s to your local git repo directory/s$LTCYN
 ##    To bypass the user/pass prompt, modify your .git/config/s as such-
-##$BOLD$LTCYN        url$RESET$LTCYN =$LTYLLW https://User:PassWord@github.com/repopath/repo.git$LTCYN
+##$BOLD$LTCYN        url$RESET$LTCYN = https://$USERPASS@github.com/repopath/repo.git$LTCYN
 ##    Run the script with$BOLD no$RESET$LTCYN options to perform all tasks without user input.
 ##    Run the script with$BOLD [help]$RESET$LTCYN option to show this info and exit.
 ##    Run the script with$BOLD [ask]$RESET$LTCYN option to input the commit message manually.
 #
 ##$CYAN    seaphor@woodbeeco.com$LTCYN
-##$LTGRN    SeaPhor on GitLab$LTCYN
-##$RED    SeaPhor on GitHub$LTCYN
+##$LTGRN    SeaPhor on GitLab  https://gitlab.com/SeaPhor-Repos$LTCYN
+##$RED    SeaPhor on GitHub  https://github.com/SeaPhor$LTCYN
 ##$LTRED    SeaPhor on Youtube$LTCYN
 ##$MAG    SeaPhor on IRC, #seaphor on Freenode Server$LTCYN
 ##$BOLD$LTMAG    SeaPhor$BLUE /$LTRED C4$RESET$LTCYN
