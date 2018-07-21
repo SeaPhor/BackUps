@@ -129,7 +129,7 @@ function git_sync
 for i in $HGITDIR ; do rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $LROOTDIR/$i/. ; rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $OROOTDIR/$i/. ; git_lab ; ogit_lab ; done
 }
 echo -e "\n $SYNCDAT DATE OF SYNC\n" >> $LOGFIL
-git_hub >> $LOGFIL 2>&1 
-git_sync >> $LOGFIL 2>&1
+git_hub 2>&1 >> $LOGFIL 
+git_sync 2>&1 >> $LOGFIL
 echo -e "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" >> $LOGFIL
 exit $?
