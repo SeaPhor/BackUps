@@ -64,9 +64,9 @@ if [[ "`echo $1`" == "help" ]]; then
 	exit $?
 fi
 	#USER=<username> #Un-Comment this line and replace PATH and <username> with actual if you need to specify a different PATH and user, OR, change the PATH value for the next line [HOMEDIR]
-	HOMEDIR=/home/$USER/MyGitRepos/home
-	LOGDIR=$HOMEDIR/logs
-	LOGFIL=$LOGDIR/syncrepos.log
+	HOMEDIR="${HOME}/MyGitRepos/home"
+	LOGDIR="$HOMEDIR/logs"
+	LOGFIL="$LOGDIR/syncrepos.log"
 	if [[ ! -d $LOGDIR ]]; then
 		mkdir $LOGDIR
 		touch $LOGFIL
@@ -100,9 +100,9 @@ done
 	OROOTDIR=$HOMEDIR/Ogitlab
 	LROOTDIR=$HOMEDIR/gitlab
 	#Change the values between the "quotes" with the repo/directory names for your repos
-	HGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
-	LGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
-	OGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks"
+	HGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks BackUps"
+	LGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks BackUps"
+	OGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks BackUps"
 if [[ "`echo $1`" == "ask" ]]; then
 	echo -e "\nType your commit statement...\n"
 	read ASKME
@@ -126,10 +126,10 @@ for i in $OGITDIR ; do echo "$OROOTDIR $i" >> $LOGFIL ; cd $OROOTDIR/$i/ ; git c
 #
 function git_sync
 {
-for i in $LGITDIR ; do rsync -arv --exclude='.git' --delete $LROOTDIR/$i/* $HROOTDIR/$i/. ; rsync -arv --exclude='.git' --delete $LROOTDIR/$i/* $OROOTDIR/$i/. ; git_hub ; ogit_lab ; done
+for i in $HGITDIR ; do rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $LROOTDIR/$i/. ; rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $OROOTDIR/$i/. ; git_lab ; ogit_lab ; done
 }
 echo -e "\n $SYNCDAT DATE OF SYNC\n" >> $LOGFIL
-git_lab 2>&1 >> $LOGFIL
-git_sync 2>&1 >> $LOGFIL
+git_hub >> $LOGFIL 2>&1 
+git_sync >> $LOGFIL 2>&1
 echo -e "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" >> $LOGFIL
 exit $?
