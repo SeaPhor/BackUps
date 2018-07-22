@@ -22,11 +22,11 @@ NULINE=`tput rmul`
 BOLD=`tput bold`
 RESET=`tput sgr0`
 #
-USERPASS="$LTYLLW""User:PassWord$LTCYN"
+USERPASS="${LTYLLW}User:PassWord$LTCYN"
 #
-if [[ "`echo $1`" == "help" ]]; then
-	echo -e "$LTCYN
-#
+usage_opts () {
+	cat <<END
+${LTCYN}#
 ##$BOLD$YELLOW   Description-$RESET$LTCYN
 ##    I started out having only one git remote repo, local network,
 ##        then I got a github account and maintained both, and when
@@ -60,9 +60,8 @@ if [[ "`echo $1`" == "help" ]]; then
 ##$MAG    SeaPhor on IRC, #seaphor on Freenode Server$LTCYN
 ##$BOLD$LTMAG    SeaPhor$BLUE /$LTRED C4$RESET$LTCYN
 #$RESET
-"
-	exit $?
-fi
+END
+}
 	#USER=<username> #Un-Comment this line and replace PATH and <username> with actual if you need to specify a different PATH and user, OR, change the PATH value for the next line [HOMEDIR]
 	HOMEDIR="${HOME}/MyGitRepos/home"
 	LOGDIR="$HOMEDIR/logs"
@@ -126,10 +125,19 @@ for i in $OGITDIR ; do echo "$OROOTDIR $i" >> $LOGFIL ; cd $OROOTDIR/$i/ ; git c
 #
 function git_sync
 {
-for i in $HGITDIR ; do rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $LROOTDIR/$i/. ; rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $OROOTDIR/$i/. ; git_lab ; ogit_lab ; done
+for i in $HGITDIR ; do rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $LROOTDIR/$i/. ; rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $OROOTDIR/$i/. ; ogit_lab ; done
+#for i in $HGITDIR ; do rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $LROOTDIR/$i/. ; rsync -arv --exclude='.git' --delete $HROOTDIR/$i/* $OROOTDIR/$i/. ; git_lab ; ogit_lab ; done
 }
-echo -e "\n $SYNCDAT DATE OF SYNC\n" >> $LOGFIL
-git_hub 2>&1 >> $LOGFIL 
-git_sync 2>&1 >> $LOGFIL
-echo -e "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" >> $LOGFIL
+case $1 in 
+	help)
+		usage_opts
+		exit 0
+		;;
+	*)
+		echo -e "\n $SYNCDAT DATE OF SYNC\n" >> $LOGFIL
+		git_hub 2>&1 >> $LOGFIL 
+		git_sync 2>&1 >> $LOGFIL
+		echo -e "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" >> $LOGFIL
+		;;
+esac
 exit $?
