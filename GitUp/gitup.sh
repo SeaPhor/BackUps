@@ -22,8 +22,6 @@ NULINE=`tput rmul`
 BOLD=`tput bold`
 RESET=`tput sgr0`
 #
-USERPASS="${LTYLLW}User:PassWord$LTCYN"
-#
 usage_opts () {
 	cat <<END
 ${LTCYN}#
@@ -48,10 +46,10 @@ ${LTCYN}#
 ##$BOLD$YELLOW    Usage-$RESETLTCYN
 ##$LTYLLW    Modify this scripts variable path/s to your local git repo directory/s
 ##    To bypass the user/pass prompt, modify your .git/configs as such-
-##$BOLD$LTCYN        url$RESET$LTCYN = https://$USERPASS@github.com/repopath/repo.git$LTCYN
-##    Run the script with$BOLD no$RESETLTCYN options to perform all tasks without user input.
-##    Run the script with$BOLD [help]$RESETLTCYN option to show this info and exit.
-##    Run the script with$BOLD [ask]$RESETLTCYN option to input the commit message manually.
+##$BOLD$LTCYN        url$RESET$LTCYN = https://${LTYLLW}User:PassWord${LTCYN}@github.com/repopath/repo.git$LTCYN
+##    Run the script with$BOLD$LTYLLW no${LTCYN}$RESET$LTCYN options to perform all tasks without user input.
+##    Run the script with$BOLD [${LTYLLW}help${LTCYN}]$RESETLTCYN option to show this info and exit.
+##    Run the script with$BOLD [${LTYLLW}ask${LTCYN}]$RESETLTCYN option to input the commit message manually.
 #
 ##$CYAN    seaphor@woodbeeco.com  $LTCYN
 ##$GREEN    SeaPhor on GitLab  https://gitlab.com/SeaPhor-Repos$LTCYN
@@ -80,7 +78,7 @@ END
 ###    Check Log Size/Rotate
 if [[ "`du -b $LOGFIL | awk '{print $1}'`" -ge "40960" ]]; then
     cd $LOGDIR
-    tar -czvf $LOGDAT-syncrepos.log.tar.gz syncrepos.log
+    tar -czvf $LOGDAT-syncrepos.log.tar.gz syncrepos.log >> $LOGFIL 2>&1
     > syncrepos.log
     cd
 fi
