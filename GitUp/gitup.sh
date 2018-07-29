@@ -135,8 +135,8 @@ case $1 in
 		;;
 	*)
 		echo -e "\n $SYNCDAT DATE OF SYNC\n" >> $LOGFIL
-		git_hub 2>&1 >> $LOGFIL 
-		git_sync 2>&1 >> $LOGFIL
+		git_hub >> $LOGFIL 2>&1
+		git_sync >> $LOGFIL 2>&1
 		echo -e "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" >> $LOGFIL
 		;;
 esac
