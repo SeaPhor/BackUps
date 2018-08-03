@@ -48,8 +48,8 @@ ${LTCYN}#
 ##    To bypass the user/pass prompt, modify your .git/configs as such-
 ##$BOLD$LTCYN        url$RESET$LTCYN = https://${LTYLLW}User:PassWord${LTCYN}@github.com/repopath/repo.git$LTCYN
 ##    Run the script with$BOLD$LTYLLW no${LTCYN}$RESET$LTCYN options to perform all tasks without user input.
-##    Run the script with$BOLD [${LTYLLW}help${LTCYN}]$RESETLTCYN option to show this info and exit.
-##    Run the script with$BOLD [${LTYLLW}ask${LTCYN}]$RESETLTCYN option to input the commit message manually.
+##    Run the script with$BOLD [${LTYLLW}help${LTCYN}]${RESET}${LTCYN} option to show this info and exit.
+##    Run the script with$BOLD [${LTYLLW}ask${LTCYN}]${RESET}${LTCYN} option to input the commit message manually.
 #
 ##$CYAN    seaphor@woodbeeco.com  $LTCYN
 ##$GREEN    SeaPhor on GitLab  https://gitlab.com/SeaPhor-Repos$LTCYN
