@@ -64,8 +64,8 @@ if [[ "`echo $1`" == "help" ]]; then
 	exit $?
 fi
 #USER=<username> #Un-Comment this line and replace PATH and <username> with actual if you need to specify a different PATH and user, OR, change the PATH value for the next line [HOMEDIR]
-	HOMEDIR=/home/$USER/MyGitRepos/home
-	LOGDIR=$HOMEDIR/logs
+	HOMEDIR=${HOME}/repos
+	LOGDIR=${HOME}/logging/gits
 	LOGFIL=$LOGDIR/syncrepos.log
 	if [[ ! -d $LOGDIR ]]; then
 		mkdir $LOGDIR
@@ -96,9 +96,9 @@ i=$[$i-1]
 done
 #
 	#Change the values of the parent dirctory/s for your dirs
-	HROOTDIR=$HOMEDIR/github
-	OROOTDIR=$HOMEDIR/Ogitlab
-	LROOTDIR=$HOMEDIR/gitlab
+	HROOTDIR=$HOMEDIR
+	OROOTDIR=$HOMEDIR
+	LROOTDIR=$HOMEDIR
 	#Change the values between the "quotes" with the repo/directory names for your repos
 	HGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks BackUps"
 	LGITDIR="Puppet-Modules SeaPhor-Scripts suma-channel-mgr_5 TipsAndTricks BackUps"
