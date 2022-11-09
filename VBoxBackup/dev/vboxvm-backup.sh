@@ -126,7 +126,7 @@ VBoxManage startvm $vmtarg --type headless 2>&1 >> $logfile
 echo -e "$edate\n" >> $logfile
 exit $?
 ####  NOTES- Concept- need to make the backups ready for automation
-####    Release 1.0.4-01 09-Nov-2022
+####    Release 1.0.4-02 09-Nov-2022
 ####    added until loop for runningvms check
 
 ####    Release 1.0.4-01 09-Nov-2022
