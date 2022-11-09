@@ -9,7 +9,7 @@
 ####    Variables and Logging 
 ##########################################################
 progname=$(basename $0)
-relver="1.0.4-01"
+relver="1.0.4-02"
 reldate="09-Nov-2022"
 SSHID=false
 YELLOW=`tput setaf 3`
@@ -51,13 +51,13 @@ edate=`date +%Y-%m-%d-%H-%M`
 bakdir="${HOME}/vmbaks"
 logfile="${bakdir}/vmbaks.log"
 [[ ! -d $bakdir ]] && { mkdir $bakdir; touch $logfile; }
-list_vms="$(VBoxManage list vms)"
-list_runvms="$(VBoxManage list runningvms)"
+list_vms=$(VBoxManage list vms)
+list_runvms=$(VBoxManage list runningvms)
 [[ ! $1 ]] && { echo " Requires 1 argument- vm-name from one of $list_vms ..."; exit 1; }
 vmtarg=$1
 if [[ $(grep $vmtarg $list_vms) == "" ]]; then
     echo "$vmtarg is NOT one of your VMs! Must be one of the following: "
-    $list_vms
+    echo $list_vms
     exit 1
 fi
 #
@@ -93,31 +93,43 @@ fi
 ####    BackUp
 ##########################################################
 #  Shutdown VM
-if [[ $(grep $vmtarg $list_runvms) != "" ]]; then
+chk_running () {
+declare -i count=1
+declare -i xtimes=6
+untill (( count == xtimes )); do
+    if [[ $(echo $list_runvms | grep $vmtarg) != "" ]]; then
+        sleep 30
+        ((++count))
+    else
+        declare -i count=6
+    fi
+done
+}
+if [[ $(echo $list_runvms | grep $vmtarg) != "" ]]; then
     $stopcmd
-    sleep 60
+    sleep 30
+    chk_running
 fi
 ####    Need to test the while- remove if/then/else condition
-#while [ $(grep $vmtarg $list_runvms) != "" ]
-#do
-#    sleep 30
-#done
-if [[ $(grep $vmtarg $list_runvms) != "" ]]; then
+if [[ $(echo $list_runvms | grep $vmtarg) != "" ]]; then
         echo "There is a problem shutting down the VM $vmtarg... exiting" 2>&1 >> $logfile
         exit 1
 else
 #  Start Export && Restart VM
     cd $bakdir
     VBoxManage export $vmtarg -o $vmtarg-$FDATE.ova 2>&1 >> $logfile && echo $rdate >> $logfile
+    sleep 30
 fi
 #  Start VM
 cd
 VBoxManage startvm $vmtarg --type headless 2>&1 >> $logfile
 echo -e "$edate\n" >> $logfile
 exit $?
-####  NOTES-
+####  NOTES- Concept- need to make the backups ready for automation
 ####    Release 1.0.4-01 09-Nov-2022
-####    Concept- need to make the backups ready for automation
+####    added until loop for runningvms check
+
+####    Release 1.0.4-01 09-Nov-2022
 ####    Added snapshot option and execution
 ####    Converted all CAP'd vars to lowercase
 ####    Removed all ssh and leveraged the VBoxManage actions
